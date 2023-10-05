@@ -48,29 +48,69 @@ def main(app):
         pyautogui.PAUSE = 2
 
         #acessar o chrome
-        pyautogui.click(702,1055)
+        pyautogui.press("win")
         pyautogui.write("chrome")
         pyautogui.press("enter")
 
+        #achar conta google
+        try:
+            iconeperfilaleatorio = pyautogui.locateCenterOnScreen("iconeperfilaleatorio.png", confidence=0.8)
+            pyautogui.click(iconeperfilaleatorio.x, iconeperfilaleatorio.y)
+        except:
+            print("icone perfil não encontrado")
+        
+        time.sleep(4) 
+
+        try:
+            iconeperfilgoogle = pyautogui.locateCenterOnScreen("iconeperfilgoogle.png", confidence=0.7)
+            pyautogui.click(iconeperfilgoogle.x, iconeperfilgoogle.y)
+        except:
+            print("icone perfil google não encontrado")
+                                      
         #acessar o site do LinkedIn
-        time.sleep(10)
+        time.sleep(6)
+        pyautogui.write("www.linkedin.com")
+        pyautogui.press("enter")
+        time.sleep(2)
         localizaraba = pyautogui.locateCenterOnScreen("linkedinaba.png")
         pyautogui.moveTo(localizaraba, 1)
-
+       
         #acessar a parte de "minha rede"
-        pyautogui.click(979, 119)
-
-        time.sleep(1)
+        entrar1 = "sim"
+        
+        while entrar1 == "sim":
+            try:
+                entrarrede = pyautogui.locateCenterOnScreen("minharede.png", confidence= 0.7)
+                pyautogui.click(entrarrede.x, entrarrede.y)
+                entrar1 = "não"
+            except:
+                print("icone minha rede não encontrado")
+                time.sleep(1)
 
         #acessar "ver todos"
-        pyautogui.click(1586, 312)
-        pyautogui.click(625, 540)
+        entrar2 = "sim"
+        while entrar2 == "sim":
+            try:
+                acessar_vertodos = pyautogui.locateCenterOnScreen("vertodos.png", confidence=0.8)
+                pyautogui.click(acessar_vertodos.x,acessar_vertodos.y)
+                entrar2 = "não"
+            except:
+                print("icone ver todos não encontrado ")
+                time.sleep(1) 
 
-        time.sleep(1) 
+        conectar = "sim"
+        while conectar == "sim":
+            try:
+                clicarconectar = pyautogui.locateCenterOnScreen("conectarbotao.png", confidence=0.7)
+                pyautogui.click(clicarconectar.x, clicarconectar.y)
+                conectar = "não"
+            except:
+                print("icone conectar não encontrado")
+                time.sleep(1)
 
-        for i in range(50):
-            pyautogui.press("tab", presses=3)
-            pyautogui.press("enter") 
+        for i in range(30):
+                        pyautogui.press("tab", presses=3)
+                        pyautogui.press("enter") 
 
     def iniciarseguir(cnx2):          
         pyautogui.PAUSE = 1
@@ -114,7 +154,6 @@ def main(app):
 
     def pararautomacao(p):
         pyautogui.moveTo(0,0)
-        pyautogui.hotkey("Ctrl-C")
         textoparar = ft.Text("Parando a automação, tire as mãos do teclado e mouse")
         app.add(textoparar)
         app.update(app)
